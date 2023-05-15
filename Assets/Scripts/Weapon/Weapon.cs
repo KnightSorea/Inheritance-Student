@@ -18,13 +18,12 @@ public class Weapon : MonoBehaviour
 
 
     // Start is called before the first frame update.
-    void Start()
+     public virtual void Start()
     {
         // Get the rigidbody, sprite renderer, and box collider components of the weapon.
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponentInChildren<SpriteRenderer>();
         boxCollider = GetComponent<BoxCollider2D>();
-
         // Disable the weapon to start with.
         DisableWeapon();
     }
@@ -37,9 +36,7 @@ public class Weapon : MonoBehaviour
         {
             // Enable the weapon and the box collider, and set a timer to disable the weapon.
             EnableWeapon();
-            boxCollider.enabled = true;
             Invoke("DisableWeapon", attackDuration);
-
             // Set a timer to reset the weapon's attack ability.
             Invoke("AttackReset", 60f / attackRate);
         }
@@ -56,6 +53,7 @@ public class Weapon : MonoBehaviour
     public void EnableWeapon()
     {
         canAttack = false;
+        Debug.Log("Weapon Enabled: Can Attack is " + canAttack);
         sr.enabled = true;
         boxCollider.enabled = true;
     }
@@ -64,6 +62,7 @@ public class Weapon : MonoBehaviour
     public void AttackReset()
     {
         canAttack = true;
+        Debug.Log("Weapon Enabled: Can Attack is " + canAttack);
     }
 
     // This function is called when the weapon's box collider collides with another collider.
