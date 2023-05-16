@@ -26,6 +26,7 @@ public class Weapon : MonoBehaviour
         boxCollider = GetComponent<BoxCollider2D>();
         // Disable the weapon to start with.
         DisableWeapon();
+        Debug.Log("surely this runs");
     }
 
     // This is a virtual function that can be overridden by subclasses of Weapon.

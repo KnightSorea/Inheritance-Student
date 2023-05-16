@@ -9,13 +9,24 @@ public class SwungWeapon : Weapon
     public float swingSpeed;
     public float swingDegrees;
 
+  //  public Transform weaponHandle;
+
+    public PlayerController playerScript;
+
+    public override void Start()
+    {
+        playerScript = GameObject.Find("Player").GetComponent<PlayerController>();
+        base.Start();
+        Debug.Log("and this? does it run?");       
+    }
+
     public override void Attack()
     {
         if (canAttack)
         {
             //base.Attack();
             //rotate to start position
-            transform.localEulerAngles = new Vector3(0, 0, -swingDegrees);
+            playerScript.weaponSlot.transform.localEulerAngles = new Vector3(0, 0, -swingDegrees);
             //activate weapon
             EnableWeapon();
             //swing and deactivate weapon
@@ -30,7 +41,7 @@ public class SwungWeapon : Weapon
         float degress = 0;
         while (degress < swingDegrees * 2)
         {
-            transform.Rotate(Vector3.forward, swingSpeed * Time.deltaTime);
+            playerScript.weaponSlot.transform.Rotate(Vector3.forward, swingSpeed * Time.deltaTime);
             degress += swingSpeed * Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
